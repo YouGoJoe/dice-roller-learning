@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  margin-top: 8px;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 80%;
+}
+
+.high-pick {
+  color: darkgreen;
+}
+
+.nat-one-roll {
+  color: crimson;
+}
+
+.roll {
+  display: inline-block;
+  margin: 2px;
+  padding: 10px;
+  border-color: azure;
+  border-radius: 2px;
+  border-style: solid;
+  border-width: 1px;
+}
