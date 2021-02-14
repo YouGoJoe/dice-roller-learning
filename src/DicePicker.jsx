@@ -3,9 +3,12 @@ import { useState } from "react";
 import DiePicker from "./DiePicker";
 import "./DicePicker.css";
 
+const MIN_NUM_DICE = 2;
+const MAX_NUM_DICE = 6;
+const ALL_DICE = [4, 6, 8, 10, 12];
+
 const DicePicker = () => {
   const [dice, setDice] = useState([]);
-
   const [rolls, setRolls] = useState([]);
 
   const rollTheDice = () => {
@@ -25,38 +28,21 @@ const DicePicker = () => {
     removeDieAtIndex(dieIndex);
   };
 
-  const onPlusClick = (die) => dice.length < 6 && setDice([...dice, die]);
+  const onPlusClick = (die) =>
+    dice.length < MAX_NUM_DICE && setDice([...dice, die]);
 
   return (
     <>
-      <DiePicker
-        die={4}
-        onPlusClick={onPlusClick}
-        onMinusClick={onMinusClick}
-      />
-      <DiePicker
-        die={6}
-        onPlusClick={onPlusClick}
-        onMinusClick={onMinusClick}
-      />
-      <DiePicker
-        die={8}
-        onPlusClick={onPlusClick}
-        onMinusClick={onMinusClick}
-      />
-      <DiePicker
-        die={10}
-        onPlusClick={onPlusClick}
-        onMinusClick={onMinusClick}
-      />
-      <DiePicker
-        die={12}
-        onPlusClick={onPlusClick}
-        onMinusClick={onMinusClick}
-      />
+      {ALL_DICE.map((die) => (
+        <DiePicker
+          die={die}
+          onPlusClick={onPlusClick}
+          onMinusClick={onMinusClick}
+        />
+      ))}
 
       <div>
-        <button disabled={dice.length < 2} onClick={rollTheDice}>
+        <button disabled={dice.length < MIN_NUM_DICE} onClick={rollTheDice}>
           Roll
         </button>
         &nbsp;
@@ -79,13 +65,13 @@ const DicePicker = () => {
         <div className="container">
           <span>Dice:&nbsp;</span>
           <div>
-            {dice.map((roll, index) => (
+            {dice.map((die, index) => (
               <span
                 key={index}
                 className={`roll`}
                 onClick={() => removeDieAtIndex(index)}
               >
-                d{roll}
+                d{die}
               </span>
             ))}
           </div>
